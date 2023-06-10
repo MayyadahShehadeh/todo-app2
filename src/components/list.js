@@ -4,8 +4,8 @@ import { SettingsContext } from '../context/settings';
 import ReactPaginate from "react-paginate";
 import './list.css'
 
-export default function list(props) {
-    const settingsContext = useContext(SettingsContext)
+export default function List(props) {
+    // const settingsContext = useContext(SettingsContext)
 
     const [pagesNum, setPagesNum] = useState(0);
     const [hide,setHide] = useState(false);

@@ -9,7 +9,6 @@ export default function SettingsProvider(props) {
     const state = {
         completedItem: false,
         numberOfItems: 4,
-        // sortField: 'difficulty'
     }
     
     return(

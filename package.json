@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "keywords": [],
@@ -14,15 +14,27 @@
   "license": "ISC",
   "dependencies": {
     "@blueprintjs/core": "^4.20.1",
+    "base-64": "^1.0.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "jsonwebtoken": "^9.0.0",
     "node-sass": "^9.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
+    "react-cookies": "^0.1.1",
     "react-dom": "^18.2.0",
     "react-if": "^4.1.4",
     "react-paginate": "^8.2.0",
     "react-router-dom": "^6.12.0",
     "react-scripts": "^5.0.1",
+    "stream": "^0.0.2",
+    "stream-browserify": "^3.0.0",
+    "superagent": "^8.0.9",
     "uuid": "^9.0.0"
+  },
+  "browser": {
+    "crypto": false,
+    "stream": false
   },
   "browserslist": {
     "production": [
