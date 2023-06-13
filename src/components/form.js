@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Card, Elevation } from "@blueprintjs/core";
+import Auth from './auth/auth';
 
 export default function form(props) {
     return (
@@ -29,10 +30,12 @@ export default function form(props) {
                     </label>
                     <br />
                     <br />
-
-                    <label>
-                        <Button type="submit">Add Item</Button>
-                    </label>
+                    <Auth capability="create">
+                        <div>Users with create access can see this</div>
+                        <label>
+                            <Button type="submit">Add Item</Button>
+                        </label>
+                    </Auth>
                 </form>
 
             </Card>

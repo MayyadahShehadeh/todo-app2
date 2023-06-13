@@ -4,11 +4,7 @@ import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
 import base64 from 'base-64';
 
-const testUsers = {
-  admin: { password: 'password', name: 'Administrator', role: 'admin', capabilities: ['create', 'read', 'update', 'delete'] },
-  editor: { password: 'password', name: 'Editor', role: 'editor', capabilities: ['read', 'update'] },
-  writer: { password: 'password', name: 'Writer', role: 'writer', capabilities: ['create'] },
-};
+
 
 export const LoginContext  = React.createContext();
 
@@ -18,38 +14,56 @@ export default function LoginProvider(props) {
   const [user, setUser] = useState({});
 
 
-  const can = (capability) => {
+  const canDo = (capability) => {
     // optional chaining 
-    return user?.actions?.includes(capability);
+    return user.user?.capabilities?.includes(capability); 
   }
 
 
   // Basic encoded(username:password) >> Basic eW=hdtgsjs
   const login = async (username, password) => {
     // localhost:3030/signin
-    const response = await superagent.post(`http//:localhost:3000/signin`).set('authorization', `Basic ${base64.encode(`${username}:${password}`)}`);
+    const response = await superagent.post(`http://localhost:3003/signin`)
+    .set('authorization', `Basic ${base64.encode(`${username}:${password}`)}`);
     console.log('inside login >> response', response);//userInfo + token
+    
     ValidateMyUser(response.body)
   }
 
+  const signUp = async (username , password , role) => {
+    const userReqBody = {
+      username:username,
+      password:password,
+      role:role
+    }
+    const response = await superagent.post(`http://localhost:3003/signup`, userReqBody)
+    console.log('inside signup :::', response.body); //userInfo + token
+    ValidateMyUser(response.body)
+
+   
+
+  }
 
   const ValidateMyUser = (data) => {
+    console.log("data::::",data);
     if (data) {
       const validUser = jwt.decode(data.token);
       if (validUser) {
         setLoginstate(true, data);
         cookie.save('userData', data);
+        console.log('userData', data);
       } else {
         setLoginstate(false, {})
       }
     } else {
       setLoginstate(false, {})
     }
-
+  }
 
     const setLoginstate = (isLogged, userData) => {
       setLoggedIn(isLogged);
       setUser(userData);
+      console.log("isLogged",isLogged);
     }
 
 
@@ -72,16 +86,17 @@ export default function LoginProvider(props) {
       user: user,
       login: login,
       logout: logout,
-      can: can
+      canDo: canDo,
+      signUp:signUp
     }
 
 
     return (
         <LoginContext.Provider value={allStates}>
           {props.children}
-        </LoginContext.Provider>
+        </LoginContext.Provider >
   
     )
-  }
+  
   }
 
