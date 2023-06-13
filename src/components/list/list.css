@@ -10,11 +10,11 @@
     padding: 10px;
     margin: 8px;
     border-radius: 5px;
-    border: 1px solid pink;
+    border: 1px solid ;
     cursor: pointer;
   }
   
   .paginationBttns a:hover {
     color: white;
-    background-color: #2b2eff;
+    /* background-color: #2b2eff; */
   }

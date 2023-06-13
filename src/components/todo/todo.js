@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import useForm from '../../hooks/form.js';
+import useForm from '../hooks/form';
 
 import { v4 as uuid } from 'uuid';
 import Form from '../form.js';
-import Header from '../header.js';
-import List from '../list.js';
+import List from '../list/list';
+
 
 const ToDo = () => {
 
@@ -48,14 +48,12 @@ const ToDo = () => {
 
   return (
     <>
-      <Header />
       <br /> <br />
       <header>
-        <h1>To Do List: {incomplete} items pending</h1>
+        <h1 style={{textAlign:'center'}}>To Do List: {incomplete} items pending</h1>
       </header>
 
       <div className="border-div" style ={{margin:"50px", display: "flex", align:"center"}}>
-        {/* <div className="toDo" style={{ margin: "80px"}}> */}
       <Form
         handleChange={handleChange}
         handleSubmit={handleSubmit}
@@ -67,7 +65,6 @@ const ToDo = () => {
       deleteItem={deleteItem}
 
       />
-
           </div> 
 
 
